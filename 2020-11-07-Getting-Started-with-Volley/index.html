@@ -6,9 +6,9 @@
 <p>So without further ado, let's get started.</p>
 <p>For this article, I will be referencing the offical documentation: <a href="https://developer.android.com/training/volley">https://developer.android.com/training/volley</a></p>
 <p>My coding environment is Ubuntu 20 but you can use Windows or Mac if you like. First things first start up <strong>android studio</strong> and create a new Empty activity:
-<img src="/assets/2020-11-07-LearningVolley/EmptyActivity.png" alt="Empty Activity"></p>
+<img src="/static/assets/2020-11-07-LearningVolley/EmptyActivity.png" alt="Empty Activity"></p>
 <p>Then I saved my project like this:
-<img src="/assets/2020-11-07-LearningVolley/LearningVolleySave.png" alt="How I saved my project"></p>
+<img src="/static/assets/2020-11-07-LearningVolley/LearningVolleySave.png" alt="How I saved my project"></p>
 <p>To import volley as the official documentation says add the following lines to your build.gradle file.
 {% highlight kotlin %}
 dependencies {
@@ -17,9 +17,9 @@ implementation 'com.android.volley:volley:1.1.1'
 }
 {% endhighlight %}
 This is all fine and dandy but they don't tell you which build.gradle file. Turns out it is the Module build.gradle. You can see it here:
-<img src="/assets/2020-11-07-LearningVolley/BuildGradle.png" alt="The Build Gradle file">
+<img src="/static/assets/2020-11-07-LearningVolley/BuildGradle.png" alt="The Build Gradle file">
 Or if you don't have that Gradle Scripts Tab with the little elephant you can find the gradle file in the app directory like this:
-<img src="/assets/2020-11-07-LearningVolley/BuildGradle2.png" alt="The Build Gradle file under the project tab"></p>
+<img src="/static/assets/2020-11-07-LearningVolley/BuildGradle2.png" alt="The Build Gradle file under the project tab"></p>
 <p>Then simply paste the implementation into the build.gradle file and hit the sync now button.</p>
 <p>Now you are all set up to use volley.</p>
 <p><strong>Alternatively you can clone volley from github</strong></p>
