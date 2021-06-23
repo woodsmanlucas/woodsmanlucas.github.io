@@ -43,9 +43,9 @@ Here are the commands I used to install CUDA:</p>
 <div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell">nvidia-smi</code></pre></div>
 <p><img src="/assets/2020-12-23-GPUs/nvidia-smi.png" alt="You will see something like this"></p>
 <p>Once you have CUDA installed properly you can test it out properly with docker. I followed <a href="https://powersj.io/post/ubuntu-server-nvidia-cuda/">this</a> tutorial to get started. Basically you just create a Dockerfile. Something like this:</p>
-<div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell"><span class="token function">mkdir</span> docker
-<span class="token builtin class-name">cd</span> docker
-<span class="token function">nano</span> Dockerfile</code></pre></div>
+<div class="gatsby-highlight" data-language="dockerfile"><pre class="language-dockerfile"><code class="language-dockerfile">mkdir docker
+cd docker
+nano Dockerfile</code></pre></div>
 <p>Then in the Dockerfile:
 {% highlight dockerfile %}
 FROM nvidia/cuda:11.1-base
