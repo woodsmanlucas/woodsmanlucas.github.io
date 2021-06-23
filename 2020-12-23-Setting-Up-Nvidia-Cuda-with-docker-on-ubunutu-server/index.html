@@ -7,75 +7,55 @@
 <p>The first step in this tutorial is to go to the <a href="https://www.nvidia.com/Download/index.aspx?lang=en-us">Nvidia site</a> and download the correct driver for your GPU and for your OS. As outlined in the <a href="https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.htm">Nvidia Documentation</a> you can check your Nvidia card by running the following command on your server:</p>
 <div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell"><span class="command-line-prompt"><span data-user=lucas data-host=dev.localhost></span></span>    lspci <span class="token operator">|</span> <span class="token function">grep</span> -i nvidia</code></pre></div>
 <p>You will want a relatively new GPU and you can check if it is compatible with CUDA <a href="https://developer.nvidia.com/cuda-gpus">here</a></p>
-<p>Now copy the driver onto your server. I used secure copy (scp) it looked something like this:
-{% highlight bash %}
-$ scp <a href="mailto:lucas@192.168.0.20">lucas@192.168.0.20</a>:~/nvidia-driver.run /Users/lucas/Desktop/NVIDIA-Linux-x86_64-450.80.02.run
-{% endhighlight %}
-Note that I'm on Mac and my file is on the desktop. Also note that my server ip is a lan ip and it is 192.168.0.20 (I statically configured the ip in my router so I don't have to keep finding the server address). This command will vary depending on your system.</p>
+<p>Now copy the driver onto your server. I used secure copy (scp) it looked something like this:</p>
+<div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell"> <span class="token function">scp</span> lucas@192.168.0.20:~/nvidia-driver.run /Users/lucas/Desktop/NVIDIA-Linux-x86_64-450.80.02.run</code></pre></div>
+<p>Note that I'm on Mac and my file is on the desktop. Also note that my server ip is a lan ip and it is 192.168.0.20 (I statically configured the ip in my router so I don't have to keep finding the server address). This command will vary depending on your system.</p>
 <p>Then I logged back into the server and ran the driver but it didn't work. I forgot to disable nouveau.</p>
-<p>To disable nouveau I created a file /usr/lib/modprobe.d/blacklist-nouveau.conf with nano:
-{% highlight bash %}
-$ sudo nano /usr/lib/modprobe.d/blacklist-nouveau.conf
-{% endhighlight %}</p>
+<p>To disable nouveau I created a file /usr/lib/modprobe.d/blacklist-nouveau.conf with nano:</p>
+<div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell"><span class="token function">sudo</span> <span class="token function">nano</span> /usr/lib/modprobe.d/blacklist-nouveau.conf</code></pre></div>
 <p>Then I added the following contents (as per the documentation listed above:
 {% highlight dockerfile %}
 blacklist nouveau
-options nouveau modeset=0
-{% endhighlight %}</p>
-<p>Then I ran the following command:
-{% highlight bash %}
-$ sudo update-initramfs -u
-{% endhighlight %}</p>
-<p>Also while I was at it I installed gcc which is a dependency of CUDA. I don't think the driver depends on it tho. And I installed make which the driver depends on.
-{% highlight bash %}
-$ sudo apt install gcc
-$ gcc --version
-$ sudo apt install make
-{% endhighlight %}</p>
-<p>Then I ran the script again with
-{% highlight bash %}
-$ sudo sh ./nvidia-driver.run
-{% endhighlight %}</p>
+options nouveau modeset=0</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">
+Then I ran the following command:
+```shell
+sudo update-initramfs -u</code></pre></div>
+<p>Also while I was at it I installed gcc which is a dependency of CUDA. I don't think the driver depends on it tho. And I installed make which the driver depends on.</p>
+<div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell"><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> gcc
+gcc --version
+<span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> <span class="token function">make</span></code></pre></div>
+<p>Then I ran the script again with</p>
+<div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell"><span class="token function">sudo</span> <span class="token function">sh</span> ./nvidia-driver.run</code></pre></div>
 <p>Then I installed docker as the site recommends <a href="https://docs.docker.com/engine/install/ubuntu/">here</a>. I had some issues with the previous install from snap (don't get me wrong snap is great when it works) but, I got those figured out.</p>
-<p>Then I installed nvidia-docker2 as per <a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html">here</a>. Those commands were:
-{% highlight bash %}
-$ distribution=$(. /etc/os-release;echo $ID$VERSION_ID)    &#x26;&#x26; curl -s -L <a href="https://nvidia.github.io/nvidia-docker/gpgkey">https://nvidia.github.io/nvidia-docker/gpgkey</a> | sudo apt-key add -    &#x26;&#x26; curl -s -L <a href="https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list">https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list</a> | sudo tee /etc/apt/sources.list.d/nvidia-docker.list
-$ sudo apt-get update
-$ sudo apt-get install nvidia-docker2
-$ sudo systemctl restart docker
-{% endhighlight %}</p>
+<p>Then I installed nvidia-docker2 as per <a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html">here</a>. Those commands were:</p>
+<div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell"><span class="token assign-left variable">distribution</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token builtin class-name">.</span> /etc/os-release<span class="token punctuation">;</span><span class="token builtin class-name">echo</span> $ID$VERSION_ID<span class="token variable">)</span></span>    <span class="token operator">&amp;&amp;</span> <span class="token function">curl</span> -s -L https://nvidia.github.io/nvidia-docker/gpgkey <span class="token operator">|</span> <span class="token function">sudo</span> apt-key <span class="token function">add</span> -    <span class="token operator">&amp;&amp;</span> <span class="token function">curl</span> -s -L https://nvidia.github.io/nvidia-docker/<span class="token variable">$distribution</span>/nvidia-docker.list <span class="token operator">|</span> <span class="token function">sudo</span> <span class="token function">tee</span> /etc/apt/sources.list.d/nvidia-docker.list
+<span class="token function">sudo</span> <span class="token function">apt-get</span> update
+<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> nvidia-docker2
+<span class="token function">sudo</span> systemctl restart docker</code></pre></div>
 <p>Then the next thing to do is to install CUDA. I followed the instructions <a href="https://developer.nvidia.com/cuda-downloads">here</a> for ubuntu this is kind of tricky because you can't restart after the install or else you'll end up with ubuntu desktop. I found this out the hard way and had to reinstall the server (after trying to remove x11 - aka - the desktop)
-Here are the commands I used to install CUDA:
-{% highlight bash %}
-$  wget <a href="https://developer.download.nvidia.com/compute/cuda/11.2.0/local_installers/cuda_11.2.0_460.27.04_linux.run">https://developer.download.nvidia.com/compute/cuda/11.2.0/local_installers/cuda_11.2.0_460.27.04_linux.run</a>
-$ sudo sh cuda_11.2.0_460.27.04_linux.run
-$ sudo apt-get autoremove
-{% endhighlight %}
-Note that apt-get autoremove will remove x11 and the desktop environment as well as some useful packages like the docs and such but oh well.</p>
-<p>Lastly verify your install with:
-{% highlight bash %}
-$ nvidia-smi
-{% endhighlight %}</p>
+Here are the commands I used to install CUDA:</p>
+<div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell"><span class="token function">wget</span> https://developer.download.nvidia.com/compute/cuda/11.2.0/local_installers/cuda_11.2.0_460.27.04_linux.run
+<span class="token function">sudo</span> <span class="token function">sh</span> cuda_11.2.0_460.27.04_linux.run
+<span class="token function">sudo</span> <span class="token function">apt-get</span> autoremove</code></pre></div>
+<p>Note that apt-get autoremove will remove x11 and the desktop environment as well as some useful packages like the docs and such but oh well.</p>
+<p>Lastly verify your install with:</p>
+<div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell">nvidia-smi</code></pre></div>
 <p><img src="/assets/2020-12-23-GPUs/nvidia-smi.png" alt="You will see something like this"></p>
-<p>Once you have CUDA installed properly you can test it out properly with docker. I followed <a href="https://powersj.io/post/ubuntu-server-nvidia-cuda/">this</a> tutorial to get started. Basically you just create a Dockerfile. Something like this:
-{% highlight bash %}
-$ mkdir docker
-$ cd docker
-$ nano Dockerfile
-{% endhighlight %}</p>
+<p>Once you have CUDA installed properly you can test it out properly with docker. I followed <a href="https://powersj.io/post/ubuntu-server-nvidia-cuda/">this</a> tutorial to get started. Basically you just create a Dockerfile. Something like this:</p>
+<div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell"><span class="token function">mkdir</span> docker
+<span class="token builtin class-name">cd</span> docker
+<span class="token function">nano</span> Dockerfile</code></pre></div>
 <p>Then in the Dockerfile:
 {% highlight dockerfile %}
 FROM nvidia/cuda:11.1-base
-CMD nvidia-smi
-{% endhighlight %}</p>
-<p>Then to build and run the file:
-{% highlight bash %}
-$ docker build -t nvidia-test .
-$ sudo docker run --gpus all nvidia-test
-{% endhighlight %}</p>
-<p>If you have all this working I would download tensor flow from docker with:
-{% highlight bash %}
-$ docker pull nvcr.io/nvidia/tensorflow:20.12-tf1-py3
-$  docker run --gpus all -it --rm nvcr.io/nvidia/tensorflow:20.12-tf1-py3
-{% endhighlight %}</p>
+CMD nvidia-smi</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">
+Then to build and run the file:
+```shell
+docker build -t nvidia-test .
+sudo docker run --gpus all nvidia-test</code></pre></div>
+<p>If you have all this working I would download tensor flow from docker with:</p>
+<div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell">docker pull nvcr.io/nvidia/tensorflow:20.12-tf1-py3
+ docker run --gpus all -it --rm nvcr.io/nvidia/tensorflow:20.12-tf1-py3</code></pre></div>
 <p>Then once you start on your project you might want to use volumes as outlined <a href="https://ngc.nvidia.com/catalog/containers/nvidia:tensorflow">here</a> Note that this build of the tensorflow in the docker container is old if you want to run the new version of tensorflow run <strong>Pip install --quite --upgrade tf-nightly</strong> then your tutorials will work.</p></div></div></main><footer class="container-module--footer--2ihr8"><a href="/">Back to the portfolio</a></footer></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/2020-12-23-Setting-Up-Nvidia-Cuda-with-docker-on-ubunutu-server/";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-79b23a2c0dd7adcbe04f.js"],"app":["/app-ba92a00d129565ba1a53.js"],"component---cache-caches-gatsby-plugin-offline-app-shell-js":["/component---cache-caches-gatsby-plugin-offline-app-shell-js-16703ee5599528db9f93.js"],"component---node-modules-lekoarts-gatsby-theme-cara-src-templates-cara-tsx":["/component---node-modules-lekoarts-gatsby-theme-cara-src-templates-cara-tsx-71da2833bd9df8b8d004.js"],"component---src-pages-tech-js":["/component---src-pages-tech-js-6df1f4361f6f6124513d.js"],"component---src-pages-travel-js":["/component---src-pages-travel-js-bca1a544452bd64477a8.js"],"component---src-templates-blog-post-js":["/component---src-templates-blog-post-js-7e39b5e12be388c71dde.js"]};/*]]>*/</script><script src="/polyfill-79b23a2c0dd7adcbe04f.js" nomodule=""></script><script src="/component---src-templates-blog-post-js-7e39b5e12be388c71dde.js" async=""></script><script src="/styles-407fe62976dc5310c43e.js" async=""></script><script src="/app-ba92a00d129565ba1a53.js" async=""></script><script src="/framework-8e528b732ab2eaadb7b7.js" async=""></script><script src="/webpack-runtime-2e84138ffa9903f21cc6.js" async=""></script></body></html>
