@@ -10,10 +10,9 @@ I've been having an interest in machine learning lately and wanted to configure 
 Disclaimer I'm still learning but hopefully this helps. Also this tutorial only works if you have one of the following gpus: NVIDIA TITAN V, TITAN Xp, TITAN X (Pascal), NVIDIA Quadro GV100, GP100 and P6000, NVIDIA DGX. Otherwise go [here](https://www.tensorflow.org/install/gpu)
 
 The first step in this tutorial is to go to the [Nvidia site](https://www.nvidia.com/Download/index.aspx?lang=en-us) and download the correct driver for your GPU and for your OS. As outlined in the [Nvidia Documentation](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.htm) you can check your Nvidia card by running the following command on your server:
-{% highlight bash %}
-$ lspci | grep -i nvidia
-{% endhighlight %}
-
+```shell{promptUser: lucas}{promptHost: dev.localhost}
+    lspci | grep -i nvidia
+```
 You will want a relatively new GPU and you can check if it is compatible with CUDA [here](https://developer.nvidia.com/cuda-gpus)
 
 Now copy the driver onto your server. I used secure copy (scp) it looked something like this:

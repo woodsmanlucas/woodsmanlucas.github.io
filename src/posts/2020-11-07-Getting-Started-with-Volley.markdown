@@ -18,12 +18,12 @@ Then I saved my project like this:
 ![How I saved my project](/assets/2020-11-07-LearningVolley/LearningVolleySave.png)
 
 To import volley as the official documentation says add the following lines to your build.gradle file.
-{% highlight kotlin %}
+```kotlin
 dependencies {
     ...
     implementation 'com.android.volley:volley:1.1.1'
 }
-{% endhighlight %}
+```
 This is all fine and dandy but they don't tell you which build.gradle file. Turns out it is the Module build.gradle. You can see it here:
 ![The Build Gradle file](/assets/2020-11-07-LearningVolley/BuildGradle.png)
 Or if you don't have that Gradle Scripts Tab with the little elephant you can find the gradle file in the app directory like this:
@@ -36,16 +36,16 @@ Now you are all set up to use volley.
 **Alternatively you can clone volley from github**
 
 
-{% highlight bash %}
+```shell
 $ git clone https://github.com/google/volley
-{% endhighlight %}
+```
 
 Then you can import it into android studio by going to **File -> New -> Import Module ...**  . Then selecting the location of the module you are importing (Volley). Then if you go to that same build.gradle file (in the module as mentioned above) and add the following line:
-{% highlight kotlin %}
+```kotlin
 dependencies {
     ...
     implementation project(':volley')
 }
-{% endhighlight %}
+```
 
 Now you are all ready to make some network requests in Kotlin with Volley. But first you might want to add internet permissions I explain that in my next post.
