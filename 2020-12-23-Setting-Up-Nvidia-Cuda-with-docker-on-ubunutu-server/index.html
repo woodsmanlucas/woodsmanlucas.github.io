@@ -46,15 +46,12 @@ Here are the commands I used to install CUDA:</p>
 <div class="gatsby-highlight" data-language="dockerfile"><pre class="language-dockerfile"><code class="language-dockerfile">mkdir docker
 cd docker
 nano Dockerfile</code></pre></div>
-<p>Then in the Dockerfile:
-{% highlight dockerfile %}
-FROM nvidia/cuda:11.1-base
-CMD nvidia-smi</p>
-<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">
-Then to build and run the file:
-```shell
-docker build -t nvidia-test .
-sudo docker run --gpus all nvidia-test</code></pre></div>
+<p>Then in the Dockerfile:</p>
+<div class="gatsby-highlight" data-language="dockerfile"><pre class="language-dockerfile"><code class="language-dockerfile"><span class="token keyword">FROM</span> nvidia/cuda<span class="token punctuation">:</span>11.1<span class="token punctuation">-</span>base
+<span class="token keyword">CMD</span> nvidia<span class="token punctuation">-</span>smi</code></pre></div>
+<p>Then to build and run the file:</p>
+<div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell">docker build -t nvidia-test <span class="token builtin class-name">.</span>
+<span class="token function">sudo</span> docker run --gpus all nvidia-test</code></pre></div>
 <p>If you have all this working I would download tensor flow from docker with:</p>
 <div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell">docker pull nvcr.io/nvidia/tensorflow:20.12-tf1-py3
  docker run --gpus all -it --rm nvcr.io/nvidia/tensorflow:20.12-tf1-py3</code></pre></div>
