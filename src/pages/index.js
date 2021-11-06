@@ -21,7 +21,7 @@ import mongo from "../images/mongo.png";
 import node from "../images/node.png";
 import swift from "../images/swift.png";
 import swiftUI from "../images/swiftui.png";
-
+import "../page.css"
 
 
 // styles
