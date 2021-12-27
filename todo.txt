@@ -2,3 +2,9 @@ Add photos to about me
 
 Animations
 
+Blog
+    - build a better layout
+    - put everything together
+        + add image data to frontmatter (https://www.gatsbyjs.com/docs/tutorial/part-7/)
+        + add html data to posts
+        
