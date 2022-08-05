@@ -40,7 +40,7 @@ function Projects () {
     return (
         <Container>
         <h1 style={AboutMeHeader} id="projects">Projects</h1>
-  
+{/*   
         <div style={projectDiv}>
             <div style={projectTextDiv} >
               <h2>Sonar Music Network</h2>
@@ -54,9 +54,9 @@ function Projects () {
               <img style={projectImage} src={sonarMusic} alt="Sonar Music Network website" />
             </a>
   }
-        </div>
+        </div> */}
   
-        <br />
+        {/* <br />
   
         <div style={projectDiv}>
             <div style={projectTextDiv}>
@@ -72,7 +72,7 @@ function Projects () {
               <img style={projectImage} src={movie} alt="Movie Website in React" />
             </a>
             }
-        </div>
+        </div> */}
   
         <br />
   
