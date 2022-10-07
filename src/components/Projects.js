@@ -20,7 +20,8 @@ const AboutMeHeader ={
   
   const projectDiv = {
     "display": "flex",
-    "justify-content": "space-between"
+    "justify-content": "space-around",
+    paddingBottom: 80
   }
   
   const projectDivInternal = {
@@ -89,6 +90,25 @@ function Projects () {
             <a href="https://woodsmanlucas.github.io/BlackJack/">
               <img style={projectImage} src={blackJack} alt="BlackJack in Vanilla Javascript" />
             </a>}
+        </div>
+        <div style={projectDiv}>
+            <div style={projectTextDiv}>
+              <h2>Sonar Music Network App</h2>
+              <p>An app for musicians to find bands</p>
+              <div style={projectDivInternal}>
+                <Button variant="contained" href="https://github.com/woodsmanlucas/SonarSwift">GitHub</Button>
+              </div>
+            </div>
+            
+        </div>
+        <div style={projectDiv}>
+            <div style={projectTextDiv}>
+              <h2>React Movie Website</h2>
+              <p>A team project with <a href="https://www.linkedin.com/in/gomezfausto/">Fausto Gomez</a>. We built a website for finding movies in React. We used the <a href="https://www.themovieDB.org">movie database api</a> to find the latest releases so the site is always up to date.</p>
+              <div style={projectDivInternal}>
+                <Button variant="contained" href="https://github.com/woodsmanlucas/react-movie-website">GitHub</Button>
+              </div>
+            </div>  
         </div>
       </Container>
     )
