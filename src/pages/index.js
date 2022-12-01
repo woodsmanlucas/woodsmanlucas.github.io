@@ -318,10 +318,6 @@ const IndexPage = () => {
     <div style={footerBottomContainer}>
     <div style={footerBottom}></div>
     <h1 style={contact}>Contact</h1>
-    {isMobile ?
-      <Button variant="outlined" style={contactEmailMobile} href="mailto:lucas@sonarmusic.social" >Let's Talk</Button>
-:
-      <Button variant="outlined" style={contactEmail} href="mailto:lucas@sonarmusic.social" >Let's Talk</Button>}
     <a style={githubFooter} href="https://github.com/woodsmanlucas">
     <img style={gitHub} src={gitHubImage} alt="github" />
     </a>
