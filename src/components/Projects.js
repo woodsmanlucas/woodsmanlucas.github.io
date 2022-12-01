@@ -5,6 +5,7 @@ import { useMediaQuery } from 'react-responsive';
 import sonarMusic from "../images/sonar.png";
 import blackJack from "../images/BlackJack.png";
 import movie from "../images/movie.png";
+import mandM from "../images/MandM.png";
 import SonarSwift from "../images/SonarSwift.png"
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -35,8 +36,8 @@ const AboutMeHeader ={
   }
   
   const projectImage ={
-    width: "30vw",
-    height: "auto"
+    height: "300px",
+    width: "auto"
   }
 
 
@@ -91,6 +92,21 @@ function Projects () {
         </div> */}
   
         <br />
+
+        <div style={projectDiv}>
+          {isTabletOrDesktop &&
+            <a href="https://github.com/woodsmanlucas/m-m-predictore/">
+              <img style={projectImage} src={mandM} alt="some M and M's" />
+            </a>}
+            <div style={projectTextDiv}>
+              <h2>M and M predictor</h2>
+              <p>A solo project with some image recognition. Recognizes M and M's for 100x100 images.</p>
+              <div style={projectDivInternal}>
+                <Button variant="contained" href="https://github.com/woodsmanlucas/m-m-predictor">GitHub</Button>
+              </div>
+            </div> 
+
+        </div> 
   
         <div style={projectDiv}>
             <div style={projectTextDiv}>
@@ -108,7 +124,7 @@ function Projects () {
         </div>
         <div style={projectDiv}>
         {isTabletOrDesktop &&
-            <a href="https://woodsmanlucas.github.io/BlackJack/">
+            <a href="https://github.com/woodsmanlucas/SonarSwift">
               <img style={projectImage} src={SonarSwift} alt="The app for the sonar music network" />
             </a>}
             <div style={projectTextDiv}>
@@ -116,11 +132,12 @@ function Projects () {
               <p>An app for musicians to find bands. I built the frontend for this over the course of a month while working 20 hours a week at Safeway. I had never done swiftUI before and the whole thing was a blast!</p>
               <div style={projectDivInternal}>               
                 {/* <Button variant="contained" onClick={handleClickOpen} >See Demo Video</Button> */}
-                <Button variant="conatained" href="https://github.com/woodsmanlucas/SonarSwift">GitHub</Button>
+                <Button variant="contained" href="https://github.com/woodsmanlucas/SonarSwift">GitHub</Button>
               </div>
             </div>
 
         </div>
+
         {/* <Dialog
           open={open}
           onClose={handleClose}
@@ -131,7 +148,7 @@ function Projects () {
           <img style={projectImage} src={movie} alt="A simple react movie website" />
           </DialogContent>
           </Dialog> */}
-        <div style={projectDiv}>
+        {/* <div style={projectDiv}>
             <div style={projectTextDiv}>
               <h2>React Movie Website</h2>
               <p>A team project with <a href="https://www.linkedin.com/in/gomezfausto/">Fausto Gomez</a>. We built a website for finding movies in React. We used the <a href="https://www.themovieDB.org">movie database api</a> to find the latest releases so the site is always up to date.</p>
@@ -140,10 +157,10 @@ function Projects () {
               </div>
             </div> 
             {isTabletOrDesktop &&
-            <a href="https://woodsmanlucas.github.io/BlackJack/">
+            <a href="https://github.com/woodsmanlucas/react-movie-website/">
               <img style={projectImage} src={movie} alt="A simple react movie website" />
             </a>}
-        </div>
+        </div> */}
       </Container>
     )
 }
