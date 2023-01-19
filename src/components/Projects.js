@@ -10,6 +10,7 @@ import SonarSwift from "../images/SonarSwift.png"
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
+import YoutubeEmbed from './Youtube';
 
 
 const AboutMeHeader ={
@@ -131,23 +132,25 @@ function Projects () {
               <h2>Sonar Music Network App</h2>
               <p>An app for musicians to find bands. I built the frontend for this over the course of a month while working 20 hours a week at Safeway. I had never done swiftUI before and the whole thing was a blast!</p>
               <div style={projectDivInternal}>               
-                {/* <Button variant="contained" onClick={handleClickOpen} >See Demo Video</Button> */}
+                <Button variant="contained" onClick={handleClickOpen} >See Demo Video</Button>
                 <Button variant="contained" href="https://github.com/woodsmanlucas/SonarSwift">GitHub</Button>
               </div>
             </div>
 
         </div>
 
-        {/* <Dialog
+       <Dialog
           open={open}
           onClose={handleClose}
+          fullWidth={true}
+          maxWidth="md"
           aria-labelledby="alert-dialog-title"
           aria-describedby='alert-dialog-description'
           >
           <DialogContent>
-          <img style={projectImage} src={movie} alt="A simple react movie website" />
+            <YoutubeEmbed embedId="TuS_z2RA4C8" />
           </DialogContent>
-          </Dialog> */}
+         </Dialog> 
         {/* <div style={projectDiv}>
             <div style={projectTextDiv}>
               <h2>React Movie Website</h2>
